@@ -18,8 +18,6 @@ public class RequestCrt {
     @Autowired
     private CardService cardService;
 
-    @Autowired
-    private CardRepository cardRepository;
 
     private static String messageLocal = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
 
@@ -32,7 +30,7 @@ public class RequestCrt {
 
     @RequestMapping(value = "/cards", method = RequestMethod.GET)
     public String cards(Model model) {
-        List<Card> cards = cardRepository.findAll();
+        List<Card> cards = cardService.getAllCards();
         model.addAttribute("cardList", cards);
         return "showCartes";
     }
