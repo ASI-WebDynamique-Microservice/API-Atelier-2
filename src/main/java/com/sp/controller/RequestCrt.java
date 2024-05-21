@@ -4,6 +4,7 @@ import com.sp.DTO.CardFormDTO;
 import com.sp.Entity.Card;
 import com.sp.Repository.CardRepository;
 import com.sp.Service.CardService;
+import com.sp.Service.Manager.CardManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,8 @@ public class RequestCrt {
     private CardRepository cardRepository;
 
     private static String messageLocal = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+    @Autowired
+    private CardManager cardManager;
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
@@ -45,18 +48,9 @@ public class RequestCrt {
 
     @RequestMapping(value = {"/addCard"}, method = RequestMethod.POST)
     public String creat(Model model, @ModelAttribute("cardForm") CardFormDTO cardForm) {
-        Card card = new Card(
-            cardForm.getName(),
-            cardForm.getDescription(),
-            cardForm.getImage(),
-            cardForm.getFamily(),
-            cardForm.getAffinity(),
-            cardForm.getHp(),
-            cardForm.getEnergy(),
-            cardForm.getAttack(),
-            cardForm.getDefence()
-        );
-        cardService.saveCard(card);
+
+        Card card = cardService.newcard(cardForm);
+
         model.addAttribute("card", card);
         return "card";
     }
