@@ -1,26 +1,48 @@
 package com.sp.Entity;
 
-public class User {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-    private int id;
+@Entity
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String surname;
+    private String login;
     private String password;
     private int balance;
 
-    public User(int id, String name, String surname, String password, int balance) {
-        this.id = id;
+    public User(
+            String name,
+            String surname,
+            String login,
+            String password,
+            int balance
+    ) {
         this.name = name;
         this.surname = surname;
+        this.login = login;
         this.password = password;
         this.balance = balance;
     }
 
-    public int getId() {
+    public User() {
+        this.name = "";
+        this.surname = "";
+        this.login = "";
+        this.password = "";
+        this.balance = 0;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -38,6 +60,14 @@ public class User {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {

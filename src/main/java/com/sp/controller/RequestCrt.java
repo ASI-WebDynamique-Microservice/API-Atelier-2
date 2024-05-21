@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import java.util.List;
 
 @Controller
@@ -24,8 +23,6 @@ public class RequestCrt {
 
     private static String messageLocal = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
 
-    @Autowired
-    private CardManager cardManager;
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
@@ -47,11 +44,9 @@ public class RequestCrt {
         return "creat";
     }
 
-    @RequestMapping(value = {"/addCard"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/addCard"}, method = RequestMethod.GET)
     public String creat(Model model, @ModelAttribute("cardForm") CardFormDTO cardForm) {
-
         Card card = cardService.newcard(cardForm);
-
         model.addAttribute("card", card);
         return "card";
     }
