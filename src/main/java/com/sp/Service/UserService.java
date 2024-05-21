@@ -1,5 +1,6 @@
 package com.sp.Service;
 
+import com.sp.DTO.UserDTO;
 import com.sp.Entity.User;
 import com.sp.Service.Manager.CardManager;
 import com.sp.Service.Manager.UserManager;
@@ -17,14 +18,14 @@ public class UserService {
     @Autowired
     CardManager cardManager;
 
-    public int addUser(JSONObject jsonUser)
+    public int addUser(UserDTO userDTO)
     {
         Random random = new Random();
         User user = new User(
-                (String)jsonUser.get("name"),
-                (String)jsonUser.get("surname"),
-                (String)jsonUser.get("login"),
-                (String)jsonUser.get("password"),
+                userDTO.getName(),
+                userDTO.getSurname(),
+                userDTO.getLogin(),
+                userDTO.getPassword(),
                 (500 + random.nextInt(2501 - 500))
         );
         userManager.saveUser(user);

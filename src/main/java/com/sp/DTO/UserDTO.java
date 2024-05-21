@@ -1,48 +1,11 @@
-package com.sp.Entity;
+package com.sp.DTO;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "cardUser")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class UserDTO {
     private String name;
     private String surname;
     private String login;
     private String password;
     private int balance;
-
-    public User(
-            String name,
-            String surname,
-            String login,
-            String password,
-            int balance
-    ) {
-        this.name = name;
-        this.surname = surname;
-        this.login = login;
-        this.password = password;
-        this.balance = balance;
-    }
-
-    public User() {
-        this.name = "";
-        this.surname = "";
-        this.login = "";
-        this.password = "";
-        this.balance = 0;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -84,4 +47,3 @@ public class User {
         this.balance = balance;
     }
 }
-

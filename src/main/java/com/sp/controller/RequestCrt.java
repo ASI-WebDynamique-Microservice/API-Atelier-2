@@ -41,11 +41,4 @@ public class RequestCrt {
         model.addAttribute("cardForm", cardForm);
         return "creat";
     }
-
-    @RequestMapping(value = {"/addCard"}, method = RequestMethod.GET)
-    public String creat(Model model, @ModelAttribute("cardForm") CardFormDTO cardForm) {
-        Card card = cardService.newcard(cardForm);
-        model.addAttribute("card", card);
-        return "card";
-    }
 }
