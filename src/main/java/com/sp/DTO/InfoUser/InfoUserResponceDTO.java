@@ -1,10 +1,27 @@
 package com.sp.DTO.InfoUser;
 
-public class UserDTO {
+public class InfoUserResponceDTO {
+    public InfoUserResponceDTO(
+            String name,
+            String surname,
+            String login,
+            int balance
+    ) {
+        this.name = name;
+        this.surname = surname;
+        this.login = login;
+        this.balance = balance;
+    }
+
+    public InfoUserResponceDTO() {
+        this.name = "";
+        this.surname = "";
+        this.login = "";
+        this.balance = 0;
+    }
     private String name;
     private String surname;
     private String login;
-    private String password;
     private int balance;
 
     public String getName() {
@@ -29,14 +46,6 @@ public class UserDTO {
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public int getBalance() {

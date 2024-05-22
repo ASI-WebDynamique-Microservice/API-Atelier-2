@@ -8,6 +8,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String token;
     private String name;
     private String surname;
     private String login;
@@ -15,12 +16,14 @@ public class User {
     private int balance;
 
     public User(
+            String token,
             String name,
             String surname,
             String login,
             String password,
             int balance
     ) {
+        this.token = token;
         this.name = name;
         this.surname = surname;
         this.login = login;
@@ -29,6 +32,7 @@ public class User {
     }
 
     public User() {
+        this.token = "";
         this.name = "";
         this.surname = "";
         this.login = "";
@@ -56,6 +60,13 @@ public class User {
         return surname;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
     public void setSurname(String surname) {
         this.surname = surname;
     }

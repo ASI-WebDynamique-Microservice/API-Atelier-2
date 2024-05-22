@@ -1,6 +1,6 @@
-package com.sp.DTO;
+package com.sp.DTO.Login;
 
-public class LoginDTO {
+public class LoginRequestDTO {
     private String login;
     private String password;
 
