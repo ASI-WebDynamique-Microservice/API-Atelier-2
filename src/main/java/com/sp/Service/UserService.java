@@ -2,6 +2,7 @@ package com.sp.Service;
 
 import com.sp.DTO.UserDTO;
 import com.sp.Entity.User;
+import com.sp.Repository.UserRepository;
 import com.sp.Service.Manager.CardManager;
 import com.sp.Service.Manager.UserManager;
 import org.json.JSONObject;
@@ -17,6 +18,10 @@ public class UserService {
 
     @Autowired
     CardManager cardManager;
+    @Autowired
+    private CardService cardService;
+    @Autowired
+    private UserRepository userRepository;
 
     public int addUser(UserDTO userDTO)
     {
@@ -28,7 +33,9 @@ public class UserService {
                 userDTO.getPassword(),
                 (500 + random.nextInt(2501 - 500))
         );
-        userManager.saveUser(user);
+
+        userRepository.save(user);
+        cardService.add5Cards(user);
         return 0;
     }
 }
