@@ -1,3 +1,5 @@
+window.history.pushState({}, null, '/index');
+
 $(document).ready(function() {
 
     // Setup user infos

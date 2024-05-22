@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var postUrl = 'http://localhost:8080/api/user/new'; // Stocke l'URL dans une variable
+    var postUrl = 'http://localhost:8080/user/new'; // Stocke l'URL dans une variable
 
     $(".ui.form").on('submit', function(event){
         event.preventDefault();
@@ -15,18 +15,11 @@ $(document).ready(function(){
 
         // Crée un nouvel objet avec le format attendu par l'API
         var apiData = {
-            username: data['username'],
+            login: data['username'],
             name: data['name'],
             surname: data['surname'],
             password: data['pwd']
         };
-        // Crée un nouvel objet avec le format attendu par l'API
-        // var apiData = {
-        //     login: data['username'],
-        //     pwd: data['pwd'],
-        //     lastName: data['surname'],
-        //     surName: data['name']
-        // };
 
         // Envoi des données en POST
         $.ajax({
