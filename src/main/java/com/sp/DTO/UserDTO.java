@@ -5,7 +5,6 @@ public class UserDTO {
     private String surname;
     private String login;
     private String password;
-    private int balance;
 
     public String getName() {
         return name;
@@ -37,13 +36,5 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getBalance() {
-        return balance;
-    }
-
-    public void setBalance(int balance) {
-        this.balance = balance;
     }
 }

@@ -11,6 +11,7 @@ public class User {
     private String token;
     private String name;
     private String surname;
+        @Column(unique = true)
     private String login;
     private String password;
     private int balance;

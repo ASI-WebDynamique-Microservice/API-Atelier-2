@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -29,27 +31,34 @@ public class UserService {
     @Autowired
     CardManager cardManager;
 
-    public int newUser(UserDTO userDTO)
+    public void
+    newUser(UserDTO userDTO)
     {
-        byte[] randomBytes = new byte[24];
-        secureRandom.nextBytes(randomBytes);
-        Random random = new Random();
-        User user = new User(
-                base64Encoder.encodeToString(randomBytes),
-                userDTO.getName(),
-                userDTO.getSurname(),
-                userDTO.getLogin(),
-                userDTO.getPassword(),
-                (500 + random.nextInt(2501 - 500))
-        );
-        userRepository.save(user);
-        return 0;
+        if(userRepository.findByLogin(userDTO.getLogin()) == null)
+        {
+            Random random = new Random();
+            User user = new User(
+                    null,
+                    userDTO.getName(),
+                    userDTO.getSurname(),
+                    userDTO.getLogin(),
+                    userDTO.getPassword(),
+                    (500 + random.nextInt(2501 - 500))
+            );
+            userRepository.save(user);
+        }
+        else
+        {
+            throw new RuntimeException("L\'utilisateru existe deja");
+        }
+
     }
 
     public String login(LoginRequestDTO loginRequestDTO)
     {
         User user = userRepository.findByLogin(loginRequestDTO.getLogin());
-        if((user != null) && (user.getPassword() == loginRequestDTO.getPassword()))
+
+        if((user != null) && (Objects.equals(user.getPassword(), loginRequestDTO.getPassword())))
         {
             byte[] randomBytes = new byte[24];
             secureRandom.nextBytes(randomBytes);
@@ -60,7 +69,7 @@ public class UserService {
         }
         else
         {
-            throw new RuntimeException("probleme authentification");
+            throw new RuntimeException("utilisateur ou mot de passe incorrecte");
         }
     }
 

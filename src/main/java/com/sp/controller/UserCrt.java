@@ -6,6 +6,7 @@ import com.sp.DTO.Login.LoginResponseDTO;
 import com.sp.DTO.UserDTO;
 import com.sp.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +20,10 @@ public class UserCrt {
     private UserService userService;
 
     @RequestMapping(value = {"/user/new"}, method = RequestMethod.POST)
-    public ResponseEntity<String> newUser(@RequestBody UserDTO user)
+    public ResponseEntity<Void> newUser(@RequestBody UserDTO user)
     {
         userService.newUser(user);
-        return ResponseEntity.ok("success");
+        return ResponseEntity.ok().build();
     }
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.POST)
