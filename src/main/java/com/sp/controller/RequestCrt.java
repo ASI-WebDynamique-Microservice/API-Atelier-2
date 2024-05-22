@@ -1,14 +1,11 @@
 package com.sp.controller;
 
-import com.sp.DTO.CardFormDTO;
+import com.sp.DTO.CardRequestDTO;
 import com.sp.Entity.Card;
-import com.sp.Repository.CardRepository;
 import com.sp.Service.CardService;
-import com.sp.Service.Manager.CardManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
@@ -37,7 +34,7 @@ public class RequestCrt {
 
     @RequestMapping(value = {"/addCard"}, method = RequestMethod.GET)
     public String creat(Model model) {
-        CardFormDTO cardForm = new CardFormDTO();
+        CardRequestDTO cardForm = new CardRequestDTO();
         model.addAttribute("cardForm", cardForm);
         return "creat";
     }

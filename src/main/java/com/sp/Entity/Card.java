@@ -16,6 +16,8 @@ public class Card {
     private int energy;
     private int attack;
     private int defence;
+    private int price;
+    private boolean isForSall;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -30,7 +32,9 @@ public class Card {
             int hp,
             int energy,
             int attack,
-            int defence
+            int defence,
+            int price,
+            boolean isForSall
     ) {
         this.name = name;
         this.description = description;
@@ -41,6 +45,8 @@ public class Card {
         this.energy = energy;
         this.attack = attack;
         this.defence = defence;
+        this.price = price;
+        this.isForSall = isForSall;
     }
 
     public Card() {
@@ -53,14 +59,17 @@ public class Card {
         this.energy = 0;
         this.attack = 0;
         this.defence = 0;
+        int price = 0;
+        boolean isForSall = false;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Card setId(Long id) {
         this.id = id;
+        return this;
     }
 
 
@@ -68,79 +77,108 @@ public class Card {
         return name;
     }
 
-    public void setName(String name) {
+    public Card setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Card setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public String getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public Card setImage(String image) {
         this.image = image;
+        return this;
     }
 
     public String getFamily() {
         return family;
     }
 
-    public void setFamily(String family) {
+    public Card setFamily(String family) {
         this.family = family;
+        return this;
     }
 
     public String getAffinity() {
         return affinity;
     }
 
-    public void setAffinity(String affinity) {
+    public Card setAffinity(String affinity) {
         this.affinity = affinity;
+        return this;
     }
 
     public int getHp() {
         return hp;
     }
 
-    public void setHp(int hp) {
+    public Card setHp(int hp) {
         this.hp = hp;
+        return this;
     }
 
     public int getEnergy() {
         return energy;
     }
 
-    public void setEnergy(int energy) {
+    public Card setEnergy(int energy) {
         this.energy = energy;
+        return this;
     }
 
     public int getAttack() {
         return attack;
     }
 
-    public void setAttack(int attack) {
+    public Card setAttack(int attack) {
         this.attack = attack;
+        return this;
     }
 
     public int getDefence() {
         return defence;
     }
 
-    public void setDefence(int defence) {
+    public Card setDefence(int defence) {
         this.defence = defence;
+        return this;
     }
 
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public Card setUser(User user) {
+        
         this.user = user;
+        return this;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public Card setPrice(int price) {
+        this.price = price;
+        return this;
+    }
+
+    public boolean isForSall() {
+        return isForSall;
+    }
+
+    public Card setForSall(boolean forSall) {
+        isForSall = forSall;
+        return this;
     }
 }
