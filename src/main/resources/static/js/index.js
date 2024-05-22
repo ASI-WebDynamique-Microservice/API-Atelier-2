@@ -1,11 +1,26 @@
-window.history.pushState({}, null, '/index');
+// window.history.pushState({}, null, '/home');
 
 $(document).ready(function() {
 
-    // Setup user infos
-    document.getElementById('userNameId').textContent = sessionStorage.getItem('username');
-    document.getElementById('userMoney').textContent = sessionStorage.getItem('money');
-    
+    var getUrl = 'http://localhost:8080/user/info'; // Stocke l'URL dans une variable
+
+    $.ajax({
+        url: getUrl,
+        type: 'GET',
+        headers: {
+            "TOKEN": sessionStorage.getItem('sessionId'),
+        },
+        success: function(data) {
+            sessionStorage.setItem('username', data.login);
+            sessionStorage.setItem('surname', data.surname);
+            sessionStorage.setItem('lastname', data.name);
+            sessionStorage.setItem('money', data.balance);
+
+            // Setup user infos
+            document.getElementById('userNameId').textContent = sessionStorage.getItem('username');
+            document.getElementById('userMoney').textContent = sessionStorage.getItem('money');
+        }
+    });    
 });
 
 let cardList = [
