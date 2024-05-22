@@ -3,7 +3,6 @@ package com.sp.Service;
 import com.sp.DTO.InfoUser.InfoUserResponceDTO;
 import com.sp.DTO.Login.LoginRequestDTO;
 import com.sp.DTO.UserDTO;
-import com.sp.Entity.Card;
 import com.sp.Entity.User;
 import com.sp.Repository.UserRepository;
 import com.sp.Service.Manager.CardManager;
@@ -13,9 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 import java.util.Base64;
-import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Random;
 
 @Service
