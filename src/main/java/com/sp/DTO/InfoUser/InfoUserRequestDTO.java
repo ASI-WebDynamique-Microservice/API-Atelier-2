@@ -1,6 +1,6 @@
-package com.sp.DTO;
+package com.sp.DTO.InfoUser;
 
-public class InfoUserDTO {
+public class InfoUserRequestDTO {
     private String login;
 
     public String getLogin() {

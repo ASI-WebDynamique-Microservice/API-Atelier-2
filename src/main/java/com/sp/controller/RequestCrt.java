@@ -19,14 +19,14 @@ public class RequestCrt {
     private CardService cardService;
 
 
-    private static String messageLocal = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+    // private static String messageLocal = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
 
 
-    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
-    public String index(Model model) {
-        model.addAttribute("messageLocal", messageLocal);
-        return "index";
-    }
+    // @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+    // public String index(Model model) {
+    //     model.addAttribute("messageLocal", messageLocal);
+    //     return "index";
+    // }
 
     @RequestMapping(value = "/cards", method = RequestMethod.GET)
     public String cards(Model model) {

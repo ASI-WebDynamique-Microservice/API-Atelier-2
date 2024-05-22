@@ -1,9 +1,13 @@
 package com.sp.controller;
 
+import com.sp.DTO.InfoUser.InfoUserResponceDTO;
+import com.sp.DTO.Login.LoginRequestDTO;
+import com.sp.DTO.Login.LoginResponseDTO;
 import com.sp.DTO.UserDTO;
 import com.sp.Service.UserService;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,10 +19,22 @@ public class UserCrt {
     private UserService userService;
 
     @RequestMapping(value = {"/user/new"}, method = RequestMethod.POST)
-    public int newUser(@RequestBody UserDTO user)
+    public ResponseEntity<String> newUser(@RequestBody UserDTO user)
     {
-        userService.addUser(user);
-        return 0;
+        userService.newUser(user);
+        return ResponseEntity.ok("success");
+    }
+
+    @RequestMapping(value = {"/login"}, method = RequestMethod.POST)
+    public LoginResponseDTO login(@RequestBody LoginRequestDTO loginRequestDTO)
+    {
+        return new LoginResponseDTO()
+                .setToken(userService.login(loginRequestDTO));
+    }
+
+    @RequestMapping(value = {"/user/info"}, method = RequestMethod.GET)
+    public InfoUserResponceDTO infoUser(@RequestHeader("TOKEN") String token) {
+        return userService.getInfoUser(token);
     }
 
 }
