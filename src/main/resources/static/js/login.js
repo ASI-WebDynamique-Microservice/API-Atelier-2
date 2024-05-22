@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var postUrl = 'http://localhost:8080/api/login'; // Stocke l'URL dans une variable
+    var postUrl = 'http://localhost:8080/login'; // Stocke l'URL dans une variable
 
     $(".ui.form").on('submit', function(event){
         event.preventDefault();
@@ -36,7 +36,7 @@ $(document).ready(function(){
                 // sessionStorage.setItem('lastname', data.lastname);
                 // sessionStorage.setItem('money', data.balance);
                 sessionStorage.setItem('money', 1000000);
-                window.location.href = "http://localhost:8080/index.html";
+                window.location.href = "/index.html";
             },
             error: function(err){
                 console.log('Erreur:', err);
