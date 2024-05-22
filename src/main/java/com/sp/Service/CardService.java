@@ -43,6 +43,8 @@ public class CardService {
         return cardRepository.findAll();
     }
 
+
+
     public Card getRandomCard(){
         List<Card> cards = cardRepository.findAll();
         if (cards.isEmpty()) {
@@ -50,14 +52,14 @@ public class CardService {
         }
         Random random = new Random();
         int randomIndex = random.nextInt(cards.size());
-        System.out.println("Carte random");
+
         return cards.get(randomIndex);
     }
 
     public Card assignCardToUser(Card card, User user) {
         if (card != null && user != null) {
             card.setUser(user);
-            System.out.println("Une carte assigné");
+
             return cardRepository.save(card);
         } else {
             throw new IllegalArgumentException("Card or User is null");
@@ -67,7 +69,7 @@ public class CardService {
 
     public void add5Cards(User user) {
         List<Card> randomCards = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             Card newCard = getRandomCard();
             randomCards.add(newCard);
         }
@@ -77,7 +79,13 @@ public class CardService {
         for (Card card : randomCards) {
             assignCardToUser(card, user);
         }
-        System.out.println("5 cartes assignés");
+
+
+    }
+
+    public List<Card> getUserCards(User user) {
+        // Récupérer les cartes associées à l'utilisateur à partir du repository
+        return cardRepository.findByUser(user);
     }
 
 }
