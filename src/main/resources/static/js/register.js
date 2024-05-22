@@ -1,3 +1,5 @@
+// window.history.pushState({}, null, '/register');
+
 $(document).ready(function(){
     var postUrl = 'http://localhost:8080/user/new'; // Stocke l'URL dans une variable
 

@@ -1,3 +1,5 @@
+// window.history.pushState({}, null, '/login');
+
 $(document).ready(function(){
     var postUrl = 'http://localhost:8080/login'; // Stocke l'URL dans une variable
 
@@ -26,16 +28,8 @@ $(document).ready(function(){
             type: 'POST',
             data: JSON.stringify(apiData),
             contentType: 'application/json',
-            success: function(data){
-                console.log(data);
+            success: function(data) {
                 sessionStorage.setItem('sessionId', data.token);
-                // sessionStorage.setItem('usernameID', data.id);
-                // sessionStorage.setItem('username', data.username);
-                sessionStorage.setItem('username', "raspoute");
-                // sessionStorage.setItem('surname', data.surname);
-                // sessionStorage.setItem('lastname', data.lastname);
-                // sessionStorage.setItem('money', data.balance);
-                sessionStorage.setItem('money', 1000000);
                 window.location.href = "/index.html";
             },
             error: function(err){
