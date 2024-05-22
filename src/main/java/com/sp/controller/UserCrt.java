@@ -37,8 +37,4 @@ public class UserCrt {
         return userService.getInfoUser(token);
     }
 
-
-
-
-
 }

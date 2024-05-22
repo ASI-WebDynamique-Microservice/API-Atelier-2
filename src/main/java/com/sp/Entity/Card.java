@@ -17,6 +17,10 @@ public class Card {
     private int attack;
     private int defence;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Card(
             String name,
             String description,
@@ -130,5 +134,13 @@ public class Card {
 
     public void setDefence(int defence) {
         this.defence = defence;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -2,6 +2,8 @@ package com.sp.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "cardUser")
 public class User {
@@ -14,6 +16,9 @@ public class User {
     private String login;
     private String password;
     private int balance;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Card> cards;
 
     public User(
             String token,
@@ -93,6 +98,14 @@ public class User {
 
     public void setBalance(int balance) {
         this.balance = balance;
+    }
+
+    public List<Card> getCards() {
+        return cards;
+    }
+
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
     }
 }
 
