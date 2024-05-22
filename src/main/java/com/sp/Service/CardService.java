@@ -33,7 +33,9 @@ public class CardService {
                 cardForm.getHp(),
                 cardForm.getEnergy(),
                 cardForm.getAttack(),
-                cardForm.getDefence()
+                cardForm.getDefence(),
+                cardForm.getPrice(),
+                cardForm.isForSell()
         );
         cardRepository.save(card);
         return card;
