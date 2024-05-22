@@ -2,6 +2,16 @@ POST http://localhost:8083/login
 Content-Type: application/json
 
 {
-  "login": "sjlkqjd",
-  "password": "akhekjzaeh"
+  "login": "test",
+  "password": "coucou"
 }
+
+#POST http://localhost:8083/user/new
+#Content-Type: application/json
+#
+#{
+#  "login": "test",
+#  "name": "hello",
+#  "password": "coucou",
+#  "surname": "bonjour"
+#}
