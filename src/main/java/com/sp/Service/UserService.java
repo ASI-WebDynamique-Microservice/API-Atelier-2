@@ -36,7 +36,6 @@ public class UserService {
 
     public void newUser(UserDTO userDTO)
     {
-        System.out.println(userDTO.getName() + " " + userDTO.getSurname() + " " + userDTO.getLogin() + " " + userDTO.getPassword());
         if(userRepository.findByLogin(userDTO.getLogin()) == null)
         {
             Random random = new Random();
