@@ -10,9 +10,8 @@ public class CardRequestDTO {
     private int energy;
     private int attack;
     private int defence;
-
     private int price;
-    private boolean isForSall;
+    private boolean isForSell;
 
     public CardRequestDTO() {
         this.name = "";
@@ -25,7 +24,7 @@ public class CardRequestDTO {
         this.attack = 0;
         this.defence = 0;
         this.price = 0;
-        this.isForSall = false;
+        this.isForSell = false;
     }
 
     public CardRequestDTO setName(String name) {
@@ -79,7 +78,7 @@ public class CardRequestDTO {
     }
 
     public CardRequestDTO setForSall(boolean forSall) {
-        isForSall = forSall;
+        isForSell = forSall;
         return this;
     }
 
@@ -135,8 +134,8 @@ public class CardRequestDTO {
         return price;
     }
 
-    public boolean isForSall() {
-        return isForSall;
+    public boolean isForSell() {
+        return isForSell;
     }
 
 }

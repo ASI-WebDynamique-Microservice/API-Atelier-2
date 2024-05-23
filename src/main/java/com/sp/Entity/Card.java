@@ -17,7 +17,7 @@ public class Card {
     private int attack;
     private int defence;
     private int price;
-    private boolean isForSall;
+    private boolean isForSell;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -34,7 +34,7 @@ public class Card {
             int attack,
             int defence,
             int price,
-            boolean isForSall
+            boolean isForSell
     ) {
         this.name = name;
         this.description = description;
@@ -46,7 +46,7 @@ public class Card {
         this.attack = attack;
         this.defence = defence;
         this.price = price;
-        this.isForSall = isForSall;
+        this.isForSell = isForSell;
     }
 
     public Card() {
@@ -60,7 +60,7 @@ public class Card {
         this.attack = 0;
         this.defence = 0;
         int price = 0;
-        boolean isForSall = false;
+        boolean isForSell = false;
     }
 
     public Long getId() {
@@ -173,12 +173,12 @@ public class Card {
         return this;
     }
 
-    public boolean isForSall() {
-        return isForSall;
+    public boolean isForSell() {
+        return isForSell;
     }
 
-    public Card setForSall(boolean forSall) {
-        isForSall = forSall;
+    public Card setForSell(boolean forSell) {
+        isForSell = forSell;
         return this;
     }
 }

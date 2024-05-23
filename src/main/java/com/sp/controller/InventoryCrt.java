@@ -17,7 +17,7 @@ public class InventoryCrt {
     @RequestMapping(value = "/inventory", method = RequestMethod.POST)
     public List<Card> cards(@RequestHeader("TOKEN") String token)
     {
-        return userService.getuserCards(token);
+        return userService.getUserCards(token);
     }
 
 }

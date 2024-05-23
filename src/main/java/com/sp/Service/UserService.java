@@ -96,10 +96,27 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("Utilisateur non connecté !"));
     }
 
-    public List<Card> getuserCards(String token) {
+    public List<Card> getUserCards(String token) {
         User user = userRepository.findByToken(token)
                 .orElseThrow(() -> new RuntimeException("Utilisateur non connecté !"));
         return user.getCards();
+    }
+    public User getUserByLogin(String login)
+    {
+        User user = userRepository.findByLogin(login);
+        if(user != null)
+        {
+            return user;
+        }
+        else
+        {
+            throw new RuntimeException("Login inexistant !");
+        }
+    }
+
+    public List<Card> getUserCardsByLogin(String login)
+    {
+        return getUserByLogin(login).getCards();
     }
 
 

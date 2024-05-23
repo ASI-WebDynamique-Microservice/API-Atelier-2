@@ -4,7 +4,6 @@ import com.sp.DTO.CardRequestDTO;
 import com.sp.Entity.Card;
 import com.sp.Entity.User;
 import com.sp.Repository.CardRepository;
-import com.sp.controller.CardCrt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +17,7 @@ public class CardService {
 
     @Autowired
     private CardRepository cardRepository;
-    @Autowired
-    private CardCrt cardCrt;
+
 
     public List<Card> getAllCards() {
         return cardRepository.findAll();
@@ -81,8 +79,19 @@ public class CardService {
                 cardRequestDTO.getAttack(),
                 cardRequestDTO.getDefence(),
                 cardRequestDTO.getPrice(),
-                cardRequestDTO.isForSall()
+                cardRequestDTO.isForSell()
         );
         cardRepository.save(card);
+    }
+
+    public List<Card> getIsForSellCards()
+    {
+        return cardRepository.findByIsForSell(true);
+
+    }
+
+    public List<Card> getUserandIsForSellCards(boolean isForSell ,User user)
+    {
+        return cardRepository.findByIsForSellAndUserId(isForSell, user.getId());
     }
 }

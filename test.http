@@ -1,4 +1,4 @@
-POST http://localhost:8083/user/new
+POST http://localhost:8080/user/new
 Content-Type: application/json
 
 {
@@ -11,7 +11,7 @@ Content-Type: application/json
 
 ###
 // Test avec mauvais password
-POST http://localhost:8083/login
+POST http://localhost:8080/login
 Content-Type: application/json
 
 {
@@ -21,7 +21,7 @@ Content-Type: application/json
 
 ###
 // Teste avec le bon mot de passe
-POST http://localhost:8083/login
+POST http://localhost:8080/login
 Content-Type: application/json
 
 {
@@ -38,7 +38,16 @@ TOKEN:<token>
 ###
 
 GET http://localhost:8080/cards
-Content-Type:application/json
+Content-Type: application/json
 
+###
 
+GET http://localhost:8080/test
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/cards
+Content-Type: application/json
+TOKEN: 6YitOW29PleR67SmzMuFwMqtAPlPGP8k
 
