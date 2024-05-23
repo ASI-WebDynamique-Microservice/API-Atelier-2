@@ -31,8 +31,6 @@ public class CardService {
         return cardRepository.findAll();
     }
 
-
-
     public Card getRandomCard(){
         List<Card> cards = cardRepository.findByIsForSellTrueAndUserIsNull();
         if (cards.isEmpty()) {
@@ -130,7 +128,7 @@ public class CardService {
                     card.getDefence(),
                     card.getPrice(),
                     card.isForSell(),
-                    card.getUser().getLogin()
+                    card.getUser().getLogin() != null ? card.getUser().getLogin(): null
             ));
         }
         return cardResponceDTOList;
