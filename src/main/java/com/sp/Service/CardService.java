@@ -1,17 +1,13 @@
 package com.sp.Service;
 
-import com.sp.DTO.Card.CardRequestDTO;
-import com.sp.DTO.Card.CardResponceDTO;
+import com.sp.DTO.CardRequestDTO;
 import com.sp.Entity.Card;
 import com.sp.Entity.User;
 import com.sp.Repository.CardRepository;
-import com.sp.Repository.UserRepository;
-import com.sp.Service.Manager.CardManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -27,7 +23,7 @@ public class CardService {
         return feedCardResponceDTO(cardRepository.findAll());
     }
 
-    public List<Card> getAllCards() {
+    public List<Card> getAllCard() {
         return cardRepository.findAll();
     }
 
@@ -46,8 +42,6 @@ public class CardService {
         if (card != null && user != null) {
             card.setUser(user);
             card.setForSell(false);
-
-
             cardRepository.save(card);
         } else {
             throw new IllegalArgumentException("Card or User is null");
@@ -128,7 +122,7 @@ public class CardService {
                     card.getDefence(),
                     card.getPrice(),
                     card.isForSell(),
-                    card.getUser().getLogin() != null ? card.getUser().getLogin(): null
+                    card.getUser().getLogin()
             ));
         }
         return cardResponceDTOList;
