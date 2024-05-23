@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class GenerateService {
@@ -22,17 +23,26 @@ public class GenerateService {
 
     private List<Card> generateInitialCards() {
         List<Card> initialCards = new ArrayList<>();
-        for (int i = 1; i <= 10; i++) {
+        Random random = new Random();
+
+        // Exemple de noms et descriptions de cartes Pokémon
+        String[] pokemonNames = {"Pikachu", "Charmander", "Squirtle", "Bulbasaur", "Eevee", "Jigglypuff", "Meowth", "Psyduck", "Snorlax", "Mewtwo"};
+        String[] pokemonFamilies = {"Electric", "Fire", "Water", "Grass", "Normal", "Fairy", "Normal", "Water", "Normal", "Psychic"};
+        String[] pokemonAffinities = {"Thunder", "Blaze", "Torrent", "Overgrow", "Adaptability", "Cute Charm", "Pickup", "Damp", "Thick Fat", "Pressure"};
+
+        for (int i = 0; i < 10; i++) {
             Card card = new Card();
-            card.setName("Card " + i);
-            card.setDescription("Description for Card " + i);
-            card.setImage("Image URL for Card " + i);
-            card.setFamily("Family for Card " + i);
-            card.setAffinity("Affinity for Card " + i);
-            card.setHp(i * 10); // Example: 10, 20, 30...
-            card.setEnergy(i * 5); // Example: 5, 10, 15...
-            card.setAttack(i * 2); // Example: 2, 4, 6...
-            card.setDefence(i * 3); // Example: 3, 6, 9...
+            card.setName(pokemonNames[i]);
+            card.setDescription("Description for " + pokemonNames[i]);
+            card.setImage("Image URL for " + pokemonNames[i]);
+            card.setFamily(pokemonFamilies[i]);
+            card.setAffinity(pokemonAffinities[i]);
+            card.setHp((i + 1) * 10); // Example: 10, 20, 30...
+            card.setEnergy((i + 1) * 5); // Example: 5, 10, 15...
+            card.setAttack((i + 1) * 2); // Example: 2, 4, 6...
+            card.setDefence((i + 1) * 3); // Example: 3, 6, 9...
+            card.setPrice(random.nextInt(500) + 1);
+            card.setForSell(true);// Price between 1 and 500
 
             initialCards.add(card);
         }

@@ -100,6 +100,7 @@ public class UserService {
         if (fetchedUser != null) {
             // Afficher les détails de l'utilisateur
             System.out.println("Utilisateur : " + fetchedUser.getName());
+            System.out.println("Nouveau Solde : " + fetchedUser.getBalance());
 
             // Récupérer les cartes associées à l'utilisateur à partir du service CardService
             List<Card> userCards = cardService.getUserCards(fetchedUser);

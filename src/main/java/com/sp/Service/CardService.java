@@ -61,6 +61,7 @@ public class CardService {
     public Card assignCardToUser(Card card, User user) {
         if (card != null && user != null) {
             card.setUser(user);
+            card.setForSell(false);
 
             return cardRepository.save(card);
         } else {
@@ -71,7 +72,7 @@ public class CardService {
 
     public void add5Cards(User user) {
         List<Card> randomCards = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             Card newCard = getRandomCard();
             randomCards.add(newCard);
         }

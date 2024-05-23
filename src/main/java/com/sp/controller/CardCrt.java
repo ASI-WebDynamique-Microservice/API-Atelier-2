@@ -1,6 +1,7 @@
 package com.sp.controller;
 
 
+import com.sp.DTO.InfoDTO;
 import com.sp.DTO.UserDTO;
 import com.sp.Service.MarketService;
 import com.sp.Service.UserService;
@@ -17,10 +18,16 @@ public class CardCrt {
 
 
     @RequestMapping(value = {"/buyCard/{id_card}"}, method = RequestMethod.GET)
-    public ResponseEntity<Void> buyCard(@RequestHeader ("TOKEN") String token, @PathVariable int id_card)
+    public InfoDTO buyCard(@RequestHeader("TOKEN") String token, @PathVariable long id_card)
     {
 
-        marketService.buyCard(token,id_card);
-        return ResponseEntity.ok().build();
+        return new InfoDTO( marketService.buyCard(token,id_card));
+    }
+    @RequestMapping(value = {"/sellCard/{id_card}"}, method = RequestMethod.GET)
+    public InfoDTO sellCard(@RequestHeader("TOKEN") String token, @PathVariable long id_card)
+    {
+
+
+        return new InfoDTO(marketService.sellCard(token,id_card));
     }
 }
