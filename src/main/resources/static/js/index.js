@@ -20,7 +20,7 @@ $(document).ready(function() {
             document.getElementById('userNameId').textContent = sessionStorage.getItem('username');
             document.getElementById('userMoney').textContent = sessionStorage.getItem('money');
         }
-    });    
+    });
 });
 
 let cardList = [
