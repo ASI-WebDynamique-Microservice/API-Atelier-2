@@ -24,11 +24,9 @@ public class CardService {
         return feedCardResponceDTO(cardRepository.findAll());
     }
 
-    public List<Card> getAllCard() {
+    public List<Card> getAllCards() {
         return cardRepository.findAll();
     }
-
-
 
     public Card getRandomCard(){
         List<Card> cards = cardRepository.findAll();
@@ -124,7 +122,7 @@ public class CardService {
                     card.getDefence(),
                     card.getPrice(),
                     card.isForSell(),
-                    card.getUser().getLogin()
+                    card.getUser().getLogin() != null ? card.getUser().getLogin(): null
             ));
         }
         return cardResponceDTOList;
