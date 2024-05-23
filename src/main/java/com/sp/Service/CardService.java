@@ -1,16 +1,13 @@
 package com.sp.Service;
 
-import com.sp.DTO.CardFormDTO;
+import com.sp.DTO.CardRequestDTO;
 import com.sp.Entity.Card;
 import com.sp.Entity.User;
 import com.sp.Repository.CardRepository;
-import com.sp.Repository.UserRepository;
-import com.sp.Service.Manager.CardManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -21,23 +18,6 @@ public class CardService {
     @Autowired
     private CardRepository cardRepository;
 
-
-
-    public Card newcard(CardFormDTO cardForm) {
-        Card card = new Card(
-                cardForm.getName(),
-                cardForm.getDescription(),
-                cardForm.getImage(),
-                cardForm.getFamily(),
-                cardForm.getAffinity(),
-                cardForm.getHp(),
-                cardForm.getEnergy(),
-                cardForm.getAttack(),
-                cardForm.getDefence()
-        );
-        cardRepository.save(card);
-        return card;
-    }
 
     public List<Card> getAllCards() {
         return cardRepository.findAll();
@@ -56,11 +36,10 @@ public class CardService {
         return cards.get(randomIndex);
     }
 
-    public Card assignCardToUser(Card card, User user) {
+    public void assignCardToUser(Card card, User user) {
         if (card != null && user != null) {
             card.setUser(user);
-
-            return cardRepository.save(card);
+            cardRepository.save(card);
         } else {
             throw new IllegalArgumentException("Card or User is null");
         }
@@ -88,4 +67,31 @@ public class CardService {
         return cardRepository.findByUser(user);
     }
 
+    public void addCard(CardRequestDTO cardRequestDTO) {
+        Card card = new Card(
+                cardRequestDTO.getName(),
+                cardRequestDTO.getDescription(),
+                cardRequestDTO.getImage(),
+                cardRequestDTO.getFamily(),
+                cardRequestDTO.getAffinity(),
+                cardRequestDTO.getHp(),
+                cardRequestDTO.getEnergy(),
+                cardRequestDTO.getAttack(),
+                cardRequestDTO.getDefence(),
+                cardRequestDTO.getPrice(),
+                cardRequestDTO.isForSell()
+        );
+        cardRepository.save(card);
+    }
+
+    public List<Card> getIsForSellCards()
+    {
+        return cardRepository.findByIsForSell(true);
+
+    }
+
+    public List<Card> getUserandIsForSellCards(boolean isForSell ,User user)
+    {
+        return cardRepository.findByIsForSellAndUserId(isForSell, user.getId());
+    }
 }

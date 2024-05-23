@@ -6,13 +6,10 @@ import com.sp.DTO.Login.LoginResponseDTO;
 import com.sp.DTO.UserDTO;
 import com.sp.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("*")
 //@RequestMapping("/user")
 public class UserCrt {
 
@@ -22,7 +19,7 @@ public class UserCrt {
     @RequestMapping(value = {"/user/new"}, method = RequestMethod.POST)
     public ResponseEntity<Void> newUser(@RequestBody UserDTO user)
     {
-        userService.newUser(user);
+        userService.addUser(user);
         return ResponseEntity.ok().build();
     }
 
@@ -37,5 +34,7 @@ public class UserCrt {
     public InfoUserResponceDTO infoUser(@RequestHeader("TOKEN") String token) {
         return userService.getInfoUser(token);
     }
+
+
 
 }
