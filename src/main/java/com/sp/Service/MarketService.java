@@ -31,23 +31,29 @@ public class MarketService {
                 .orElseThrow(() -> new RuntimeException("impossible de trouver le token"));
         Card cardBuy = cardRepository.findById(id_card)
                 .orElseThrow(() -> new RuntimeException("impossible de trouver le id"));
+
+        User userSeller = cardBuy.getUser();
+
         if(cardBuy.isForSell()) {
             cardBuy.setUser(userBuy);
             cardBuy.setForSell(false);
         }
         else{return "Carte indispo";}
 
-        int newBalance = userBuy.getBalance() - cardBuy.getPrice();
-        if(newBalance > 0) {
-            userBuy.setBalance(newBalance);
+        int newBalanceBuy = userBuy.getBalance() - cardBuy.getPrice();
+        int newBalanceSeller = userBuy.getBalance() - cardBuy.getPrice();
+        if(newBalanceBuy > 0) {
+            userBuy.setBalance(newBalanceBuy);
+            userSeller.setBalance(newBalanceSeller);
         }
         else{return "Solde insuffisant";}
 
         cardRepository.save(cardBuy);
         userRepository.save(userBuy);
+        userRepository.save(userSeller);
         userService.displayUserAndCards(userBuy);
 
-        return String.valueOf(newBalance);
+        return String.valueOf(newBalanceBuy);
 
     }
     public String sellCard(String token, long id_card) {
@@ -57,18 +63,17 @@ public class MarketService {
         Card cardSell = cardRepository.findById(id_card)
                 .orElseThrow(() -> new RuntimeException("impossible de trouver le id"));
         if(!cardSell.isForSell()) {
-            cardSell.setUser(null);
+
             cardSell.setForSell(true);
 
         }
         else{return "Carte indspo";}
 
-        int newBalance = userSell.getBalance() + cardSell.getPrice();
-        userSell.setBalance(newBalance);
+
         userRepository.save(userSell);
         cardRepository.save(cardSell);
         userService.displayUserAndCards(userSell);
-        return String.valueOf(newBalance);
+        return "Carte à vendre";
 
     }
 }
