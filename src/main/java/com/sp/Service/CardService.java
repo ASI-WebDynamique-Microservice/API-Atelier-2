@@ -1,6 +1,7 @@
 package com.sp.Service;
 
-import com.sp.DTO.CardRequestDTO;
+import com.sp.DTO.Card.CardRequestDTO;
+import com.sp.DTO.Card.CardResponceDTO;
 import com.sp.Entity.Card;
 import com.sp.Entity.User;
 import com.sp.Repository.CardRepository;
@@ -23,7 +24,7 @@ public class CardService {
         return feedCardResponceDTO(cardRepository.findAll());
     }
 
-    public List<Card> getAllCard() {
+    public List<Card> getAllCards() {
         return cardRepository.findAll();
     }
 
@@ -107,9 +108,12 @@ public class CardService {
 
     private List<CardResponceDTO> feedCardResponceDTO(List<Card> cardList)
     {
-        List <CardResponceDTO> cardResponceDTOList = null;
+        List <CardResponceDTO> cardResponceDTOList = new ArrayList<>();
         for (Card card : cardList) {
-            cardResponceDTOList.add(new CardResponceDTO(
+            String login = null;
+            if (card.getUser() != null)
+                login = card.getUser().getLogin();
+            CardResponceDTO cardResponceDTO = new CardResponceDTO(
                     card.getId(),
                     card.getName(),
                     card.getDescription(),
@@ -122,8 +126,9 @@ public class CardService {
                     card.getDefence(),
                     card.getPrice(),
                     card.isForSell(),
-                    card.getUser().getLogin()
-            ));
+                    login
+            );
+            cardResponceDTOList.add(cardResponceDTO);
         }
         return cardResponceDTOList;
     }
