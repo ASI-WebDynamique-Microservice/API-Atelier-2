@@ -34,7 +34,12 @@ $(document).ready(function(){
             },
             error: function(err){
                 console.log('Erreur:', err);
-                console.log('Détails de l\'erreur:', err.responseText);
+
+                // Affiche un message d'erreur
+                document.getElementById('errorMessage').textContent = "Login ou mot de passe incorrect";
+                // Réinitialise le formulaire
+                $(".ui.form").trigger('reset');
+                // console.log('Détails de l\'erreur:', err.responseText);
             },
         });
     });

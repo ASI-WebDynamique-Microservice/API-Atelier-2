@@ -1,11 +1,8 @@
-package com.sp.Entity;
+package com.sp.DTO.Card;
 
-import jakarta.persistence.*;
+import com.sp.Entity.User;
 
-@Entity
-public class Card {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CardResponceDTO {
     private Long id;
     private String name;
     private String description;
@@ -18,12 +15,10 @@ public class Card {
     private int defence;
     private int price;
     private boolean isForSell;
+    private String login;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    public Card(
+    public CardResponceDTO(
+            Long id,
             String name,
             String description,
             String image,
@@ -34,8 +29,10 @@ public class Card {
             int attack,
             int defence,
             int price,
-            boolean isForSell
+            boolean isForSell,
+            String login
     ) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.image = image;
@@ -47,37 +44,39 @@ public class Card {
         this.defence = defence;
         this.price = price;
         this.isForSell = isForSell;
+        this.login = login;
     }
-
-    public Card() {
+    public CardResponceDTO()
+    {
+        this.id = null;
         this.name = "";
         this.description = "";
-        this.image = "";
-        this.family = "";
-        this.affinity = "";
+        this.image = "image";
+        this.family = "family";
+        this.affinity = "affinity";
         this.hp = 0;
         this.energy = 0;
         this.attack = 0;
         this.defence = 0;
-        int price = 0;
-        boolean isForSell = false;
+        this.price = 0;
+        this.isForSell = false;
+        this.login = "";
     }
 
     public Long getId() {
         return id;
     }
 
-    public Card setId(Long id) {
+    public CardResponceDTO setId(Long id) {
         this.id = id;
         return this;
     }
-
 
     public String getName() {
         return name;
     }
 
-    public Card setName(String name) {
+    public CardResponceDTO setName(String name) {
         this.name = name;
         return this;
     }
@@ -86,7 +85,7 @@ public class Card {
         return description;
     }
 
-    public Card setDescription(String description) {
+    public CardResponceDTO setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -95,7 +94,7 @@ public class Card {
         return image;
     }
 
-    public Card setImage(String image) {
+    public CardResponceDTO setImage(String image) {
         this.image = image;
         return this;
     }
@@ -104,7 +103,7 @@ public class Card {
         return family;
     }
 
-    public Card setFamily(String family) {
+    public CardResponceDTO setFamily(String family) {
         this.family = family;
         return this;
     }
@@ -113,7 +112,7 @@ public class Card {
         return affinity;
     }
 
-    public Card setAffinity(String affinity) {
+    public CardResponceDTO setAffinity(String affinity) {
         this.affinity = affinity;
         return this;
     }
@@ -122,7 +121,7 @@ public class Card {
         return hp;
     }
 
-    public Card setHp(int hp) {
+    public CardResponceDTO setHp(int hp) {
         this.hp = hp;
         return this;
     }
@@ -131,7 +130,7 @@ public class Card {
         return energy;
     }
 
-    public Card setEnergy(int energy) {
+    public CardResponceDTO setEnergy(int energy) {
         this.energy = energy;
         return this;
     }
@@ -140,7 +139,7 @@ public class Card {
         return attack;
     }
 
-    public Card setAttack(int attack) {
+    public CardResponceDTO setAttack(int attack) {
         this.attack = attack;
         return this;
     }
@@ -149,18 +148,8 @@ public class Card {
         return defence;
     }
 
-    public Card setDefence(int defence) {
+    public CardResponceDTO setDefence(int defence) {
         this.defence = defence;
-        return this;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Card setUser(User user) {
-
-        this.user = user;
         return this;
     }
 
@@ -168,7 +157,7 @@ public class Card {
         return price;
     }
 
-    public Card setPrice(int price) {
+    public CardResponceDTO setPrice(int price) {
         this.price = price;
         return this;
     }
@@ -177,8 +166,17 @@ public class Card {
         return isForSell;
     }
 
-    public Card setForSell(boolean forSell) {
+    public CardResponceDTO setForSell(boolean forSell) {
         isForSell = forSell;
+        return this;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public CardResponceDTO setLogin(String login) {
+        this.login = login;
         return this;
     }
 }

@@ -1,6 +1,6 @@
-package com.sp.DTO;
+package com.sp.DTO.Card;
 
-public class CardFormDTO {
+public class CardRequestDTO {
     private String name;
     private String description;
     private String image;
@@ -13,7 +13,7 @@ public class CardFormDTO {
     private int price;
     private boolean isForSell;
 
-    public CardFormDTO() {
+    public CardRequestDTO() {
         this.name = "";
         this.description = "";
         this.image = "";
@@ -24,46 +24,66 @@ public class CardFormDTO {
         this.attack = 0;
         this.defence = 0;
         this.price = 0;
-        this.isForSell = true;
+        this.isForSell = false;
     }
 
-    public void setName(String name) {
+    public CardRequestDTO setName(String name) {
         this.name = name;
+        return this;
     }
 
-    public void setDescription(String description) {
+    public CardRequestDTO setDescription(String description) {
         this.description = description;
+        return this;
     }
 
-    public void setImage(String image) {
+    public CardRequestDTO setImage(String image) {
         this.image = image;
+        return this;
     }
 
-    public void setFamily(String family) {
+    public CardRequestDTO setFamily(String family) {
         this.family = family;
+        return this;
     }
 
-    public void setAffinity(String affinity) {
+    public CardRequestDTO setAffinity(String affinity) {
         this.affinity = affinity;
+        return this;
     }
 
-    public void setHp(int hp) {
+    public CardRequestDTO setHp(int hp) {
         this.hp = hp;
+        return this;
     }
 
-    public void setEnergy(int energy) {
+    public CardRequestDTO setEnergy(int energy) {
         this.energy = energy;
+        return this;
     }
 
-    public void setAttack(int attack) {
+    public CardRequestDTO setAttack(int attack) {
         this.attack = attack;
+        return this;
     }
 
-    public void setDefence(int defence) {
+    public CardRequestDTO setDefence(int defence) {
         this.defence = defence;
+        return this;
     }
 
-    public CardFormDTO(String name, String description, String image, String family, String affinity, int hp, int energy, int attack, int defence, int price, boolean isForSell) {
+    public CardRequestDTO setPrice(int price) {
+        this.price = price;
+        return this;
+    }
+
+    public CardRequestDTO setForSall(boolean forSall) {
+        isForSell = forSall;
+        return this;
+    }
+
+
+    public CardRequestDTO(String name, String description, String image, String family, String affinity, int hp, int energy, int attack, int defence,int price, boolean isForSell) {
         this.name = name;
         this.description = description;
         this.image = image;
@@ -120,5 +140,6 @@ public class CardFormDTO {
     public boolean isForSell() {
         return isForSell;
     }
+
 }
 

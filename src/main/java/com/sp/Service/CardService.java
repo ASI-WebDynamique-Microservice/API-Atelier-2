@@ -1,6 +1,7 @@
 package com.sp.Service;
 
-import com.sp.DTO.CardFormDTO;
+import com.sp.DTO.Card.CardRequestDTO;
+import com.sp.DTO.Card.CardResponceDTO;
 import com.sp.Entity.Card;
 import com.sp.Entity.User;
 import com.sp.Repository.CardRepository;
@@ -22,23 +23,8 @@ public class CardService {
     private CardRepository cardRepository;
 
 
-
-    public Card newcard(CardFormDTO cardForm) {
-        Card card = new Card(
-                cardForm.getName(),
-                cardForm.getDescription(),
-                cardForm.getImage(),
-                cardForm.getFamily(),
-                cardForm.getAffinity(),
-                cardForm.getHp(),
-                cardForm.getEnergy(),
-                cardForm.getAttack(),
-                cardForm.getDefence(),
-                cardForm.getPrice(),
-                cardForm.isForSell()
-        );
-        cardRepository.save(card);
-        return card;
+    public List<CardResponceDTO> getAllCardReponceDTOList() {
+        return feedCardResponceDTO(cardRepository.findAll());
     }
 
     public List<Card> getAllCards() {
@@ -58,12 +44,13 @@ public class CardService {
         return cards.get(randomIndex);
     }
 
-    public Card assignCardToUser(Card card, User user) {
+    public void assignCardToUser(Card card, User user) {
         if (card != null && user != null) {
             card.setUser(user);
             card.setForSell(false);
 
-            return cardRepository.save(card);
+
+            cardRepository.save(card);
         } else {
             throw new IllegalArgumentException("Card or User is null");
         }
@@ -91,4 +78,61 @@ public class CardService {
         return cardRepository.findByUser(user);
     }
 
+    public List<CardResponceDTO> getUserCardReponceDTOList(User user) {
+        // Récupérer les cartes associées à l'utilisateur à partir du repository
+        return feedCardResponceDTO(cardRepository.findByUser(user));
+    }
+
+
+    public void addCard(CardRequestDTO cardRequestDTO) {
+        Card card = new Card(
+                cardRequestDTO.getName(),
+                cardRequestDTO.getDescription(),
+                cardRequestDTO.getImage(),
+                cardRequestDTO.getFamily(),
+                cardRequestDTO.getAffinity(),
+                cardRequestDTO.getHp(),
+                cardRequestDTO.getEnergy(),
+                cardRequestDTO.getAttack(),
+                cardRequestDTO.getDefence(),
+                cardRequestDTO.getPrice(),
+                cardRequestDTO.isForSell()
+        );
+        cardRepository.save(card);
+    }
+
+    public List<CardResponceDTO> getIsForSellCards(boolean isForSell)
+    {
+        return feedCardResponceDTO(cardRepository.findByIsForSell(isForSell));
+
+    }
+
+    public List<CardResponceDTO> getUserandIsForSellCards(boolean isForSell , User user)
+    {
+        List <Card> cardList = cardRepository.findByIsForSellAndUserId(isForSell, user.getId());
+        return feedCardResponceDTO(cardList);
+    }
+
+    private List<CardResponceDTO> feedCardResponceDTO(List<Card> cardList)
+    {
+        List <CardResponceDTO> cardResponceDTOList = null;
+        for (Card card : cardList) {
+            cardResponceDTOList.add(new CardResponceDTO(
+                    card.getId(),
+                    card.getName(),
+                    card.getDescription(),
+                    card.getImage(),
+                    card.getFamily(),
+                    card.getAffinity(),
+                    card.getHp(),
+                    card.getEnergy(),
+                    card.getAttack(),
+                    card.getDefence(),
+                    card.getPrice(),
+                    card.isForSell(),
+                    card.getUser().getLogin()
+            ));
+        }
+        return cardResponceDTOList;
+    }
 }

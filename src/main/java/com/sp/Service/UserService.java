@@ -1,5 +1,6 @@
 package com.sp.Service;
 
+import com.sp.DTO.Card.CardResponceDTO;
 import com.sp.DTO.InfoUser.InfoUserResponceDTO;
 import com.sp.DTO.Login.LoginRequestDTO;
 import com.sp.DTO.UserDTO;
@@ -36,7 +37,7 @@ public class UserService {
     private CardService cardService;
 
 
-    public void newUser(UserDTO userDTO)
+    public void addUser(UserDTO userDTO)
     {
         if(userRepository.findByLogin(userDTO.getLogin()) == null)
         {
@@ -45,7 +46,7 @@ public class UserService {
                     null,
                     userDTO.getName(),
                     userDTO.getSurname(),
-                    userDTO.getLogin(),
+                    userDTO.getLogin().toLowerCase(),
                     userDTO.getPassword(),
                     (500 + random.nextInt(2501 - 500))
             );
@@ -62,7 +63,7 @@ public class UserService {
 
     public String login(LoginRequestDTO loginRequestDTO)
     {
-        User user = userRepository.findByLogin(loginRequestDTO.getLogin());
+        User user = userRepository.findByLogin(loginRequestDTO.getLogin().toLowerCase());
 
         if((user != null) && (Objects.equals(user.getPassword(), loginRequestDTO.getPassword())))
         {
@@ -90,6 +91,34 @@ public class UserService {
                 user.getLogin(),
                 user.getBalance()
         );
+    }
+
+    public void islogin(String token) {
+        userRepository.findByToken(token)
+                .orElseThrow(() -> new RuntimeException("Utilisateur non connecté !"));
+    }
+
+    public List<Card> getUserCards(String token) {
+        User user = userRepository.findByToken(token)
+                .orElseThrow(() -> new RuntimeException("Utilisateur non connecté !"));
+        return user.getCards();
+    }
+    public User getUserByLogin(String login)
+    {
+        User user = userRepository.findByLogin(login);
+        if(user != null)
+        {
+            return user;
+        }
+        else
+        {
+            throw new RuntimeException("Login inexistant !");
+        }
+    }
+
+    public User getUserCardsByLogin(String login)
+    {
+        return getUserByLogin(login);
     }
 
 

@@ -3,6 +3,8 @@ package com.sp.Service;
 import com.sp.Entity.Card;
 import com.sp.Repository.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 @Service
-public class GenerateService {
+public class GenerateService implements ApplicationRunner {
 
     @Autowired
     private CardRepository cardRepository;
@@ -47,5 +49,11 @@ public class GenerateService {
             initialCards.add(card);
         }
         return initialCards;
+    }
+
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        System.out.println("Intiailisaiton des données");
+        createAndSaveInitialCards();
     }
 }
