@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface CardRepository extends JpaRepository<Card, Long> {
     List<Card> findByUser(User user);
+    List<Card> findByIsForSellTrueAndUserIsNull();
     List<Card> findByIsForSell(boolean forSall);
     List<Card> findByIsForSellAndUserId(boolean forSall, Long userId);
 }

@@ -108,5 +108,11 @@ public class User {
     public void setCards(List<Card> cards) {
         this.cards = cards;
     }
+    public void addCard(Card card) {
+        this.cards.add(card);
+    }
+    public void removeCard(Card card) {
+        this.cards.remove(card);
+    }
 }
 

@@ -82,7 +82,8 @@ public class CardRequestDTO {
         return this;
     }
 
-    public CardRequestDTO(String name, String description, String image, String family, String affinity, int hp, int energy, int attack, int defence) {
+
+    public CardRequestDTO(String name, String description, String image, String family, String affinity, int hp, int energy, int attack, int defence,int price, boolean isForSell) {
         this.name = name;
         this.description = description;
         this.image = image;
@@ -92,6 +93,8 @@ public class CardRequestDTO {
         this.energy = energy;
         this.attack = attack;
         this.defence = defence;
+        this.price=price;
+        this.isForSell = isForSell;
     }
 
     public String getName() {

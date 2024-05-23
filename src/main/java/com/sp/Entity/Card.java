@@ -159,7 +159,7 @@ public class Card {
     }
 
     public Card setUser(User user) {
-        
+
         this.user = user;
         return this;
     }

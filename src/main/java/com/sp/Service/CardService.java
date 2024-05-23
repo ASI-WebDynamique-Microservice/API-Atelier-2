@@ -5,10 +5,13 @@ import com.sp.DTO.Card.CardResponceDTO;
 import com.sp.Entity.Card;
 import com.sp.Entity.User;
 import com.sp.Repository.CardRepository;
+import com.sp.Repository.UserRepository;
+import com.sp.Service.Manager.CardManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -29,7 +32,7 @@ public class CardService {
     }
 
     public Card getRandomCard(){
-        List<Card> cards = cardRepository.findAll();
+        List<Card> cards = cardRepository.findByIsForSellTrueAndUserIsNull();
         if (cards.isEmpty()) {
             return null; // ou vous pouvez lancer une exception
         }
@@ -42,6 +45,9 @@ public class CardService {
     public void assignCardToUser(Card card, User user) {
         if (card != null && user != null) {
             card.setUser(user);
+            card.setForSell(false);
+
+
             cardRepository.save(card);
         } else {
             throw new IllegalArgumentException("Card or User is null");
@@ -51,7 +57,7 @@ public class CardService {
 
     public void add5Cards(User user) {
         List<Card> randomCards = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             Card newCard = getRandomCard();
             randomCards.add(newCard);
         }
