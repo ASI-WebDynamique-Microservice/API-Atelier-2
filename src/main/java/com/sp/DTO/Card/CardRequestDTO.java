@@ -1,4 +1,4 @@
-package com.sp.DTO;
+package com.sp.DTO.Card;
 
 public class CardRequestDTO {
     private String name;
