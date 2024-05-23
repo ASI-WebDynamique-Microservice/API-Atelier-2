@@ -1,5 +1,6 @@
 package com.sp.Service;
 
+import com.sp.DTO.Card.CardResponceDTO;
 import com.sp.DTO.InfoUser.InfoUserResponceDTO;
 import com.sp.DTO.Login.LoginRequestDTO;
 import com.sp.DTO.UserDTO;
@@ -114,9 +115,9 @@ public class UserService {
         }
     }
 
-    public List<Card> getUserCardsByLogin(String login)
+    public User getUserCardsByLogin(String login)
     {
-        return getUserByLogin(login).getCards();
+        return getUserByLogin(login);
     }
 
 

@@ -1,7 +1,8 @@
 package com.sp.controller;
 
 
-import com.sp.DTO.CardRequestDTO;
+import com.sp.DTO.Card.CardRequestDTO;
+import com.sp.DTO.Card.CardResponceDTO;
 import com.sp.Entity.Card;
 import com.sp.Service.CardService;
 import com.sp.Service.GenerateService;
@@ -23,19 +24,19 @@ public class CardCrt {
     private UserService userService;
 
     @RequestMapping(value = "/cards", method = RequestMethod.GET)
-    public List<Card> cards(@RequestHeader("TOKEN") String token, @RequestParam(required = false) String login, @RequestParam(required = false) Boolean isForSell) {
+    public List<CardResponceDTO> cards(@RequestHeader("TOKEN") String token, @RequestParam(required = false) String login, @RequestParam(required = false) Boolean isForSell) {
         userService.islogin(token);
         if(login == null && isForSell == null)
         {
-            return cardService.getAllCards();
+            return cardService.getAllCardReponceDTOList();
         }
         else if(login != null && isForSell == null)
         {
-            return userService.getUserCardsByLogin(login);
+            return cardService.getUserCardReponceDTOList(userService.getUserCardsByLogin(login));
         }
         else if (login == null && isForSell)
         {
-            return cardService.getIsForSellCards();
+            return cardService.getIsForSellCards(isForSell);
         }
         else
         {
