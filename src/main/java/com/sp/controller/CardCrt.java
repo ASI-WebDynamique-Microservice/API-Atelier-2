@@ -59,13 +59,14 @@ public class CardCrt {
     {
         return new InfoDTO(marketService.sellCard(token,id_card));
     }
-}
-
     @RequestMapping(value = {"/cards"}, method = RequestMethod.POST)
     public ResponseEntity<Void>  creat(@RequestHeader("TOKEN") String token, @RequestBody CardRequestDTO cardRequestDTO) {
         userService.islogin(token);
         cardService.addCard(cardRequestDTO);
         return ResponseEntity.ok().build();
     }
+}
+
+
 
 
