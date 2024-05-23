@@ -3,6 +3,7 @@ package com.sp.Service;
 import com.sp.DTO.InfoUser.InfoUserResponceDTO;
 import com.sp.DTO.Login.LoginRequestDTO;
 import com.sp.DTO.UserDTO;
+import com.sp.Entity.Card;
 import com.sp.Entity.User;
 import com.sp.Repository.UserRepository;
 import com.sp.Service.Manager.CardManager;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
@@ -34,7 +36,7 @@ public class UserService {
     private CardService cardService;
 
 
-    public void newUser(UserDTO userDTO)
+    public void addUser(UserDTO userDTO)
     {
         if(userRepository.findByLogin(userDTO.getLogin()) == null)
         {
@@ -43,7 +45,7 @@ public class UserService {
                     null,
                     userDTO.getName(),
                     userDTO.getSurname(),
-                    userDTO.getLogin(),
+                    userDTO.getLogin().toLowerCase(),
                     userDTO.getPassword(),
                     (500 + random.nextInt(2501 - 500))
             );
@@ -59,7 +61,7 @@ public class UserService {
 
     public String login(LoginRequestDTO loginRequestDTO)
     {
-        User user = userRepository.findByLogin(loginRequestDTO.getLogin());
+        User user = userRepository.findByLogin(loginRequestDTO.getLogin().toLowerCase());
 
         if((user != null) && (Objects.equals(user.getPassword(), loginRequestDTO.getPassword())))
         {
@@ -87,6 +89,34 @@ public class UserService {
                 user.getLogin(),
                 user.getBalance()
         );
+    }
+
+    public void islogin(String token) {
+        userRepository.findByToken(token)
+                .orElseThrow(() -> new RuntimeException("Utilisateur non connecté !"));
+    }
+
+    public List<Card> getUserCards(String token) {
+        User user = userRepository.findByToken(token)
+                .orElseThrow(() -> new RuntimeException("Utilisateur non connecté !"));
+        return user.getCards();
+    }
+    public User getUserByLogin(String login)
+    {
+        User user = userRepository.findByLogin(login);
+        if(user != null)
+        {
+            return user;
+        }
+        else
+        {
+            throw new RuntimeException("Login inexistant !");
+        }
+    }
+
+    public List<Card> getUserCardsByLogin(String login)
+    {
+        return getUserByLogin(login).getCards();
     }
 
 
