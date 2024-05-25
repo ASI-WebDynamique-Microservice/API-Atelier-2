@@ -12,7 +12,6 @@ $(document).ready(function() {
             sessionStorage.setItem('username', data.login);
             sessionStorage.setItem('surname', data.surname);
             sessionStorage.setItem('lastname', data.name);
-            sessionStorage.setItem('money', data.balance);
         }
     }); 
     
@@ -23,7 +22,5 @@ $(document).ready(function() {
     document.getElementById('buyButton').addEventListener('click', function() {
         window.location.href = '/pages/buy.html';
     });
-
-
 });
 
