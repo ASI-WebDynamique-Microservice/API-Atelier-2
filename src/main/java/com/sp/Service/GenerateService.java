@@ -44,7 +44,7 @@ public class GenerateService implements ApplicationRunner {
             card.setAttack((i + 1) * 2); // Example: 2, 4, 6...
             card.setDefence((i + 1) * 3); // Example: 3, 6, 9...
             card.setPrice(random.nextInt(500) + 1);
-            card.setForSell(true);// Price between 1 and 500
+            card.setForSell(false);// Price between 1 and 500
 
             initialCards.add(card);
         }
