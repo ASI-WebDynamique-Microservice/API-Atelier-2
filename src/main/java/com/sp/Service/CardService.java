@@ -28,10 +28,8 @@ public class CardService {
         return cardRepository.findAll();
     }
 
-
-
     public Card getRandomCard(){
-        List<Card> cards = cardRepository.findByIsForSellTrueAndUserIsNull();
+        List<Card> cards = cardRepository.findByUserIsNull();
         if (cards.isEmpty()) {
             return null; // ou vous pouvez lancer une exception
         }
